@@ -51,7 +51,7 @@ class sv_navigation extends init {
 		$settings['location']                   = $this->get_prefix( $settings['location'] );
 
 		ob_start();
-		include( $this->get_path( 'lib/tpl/frontend.php' ) );
+		include( $this->get_path( 'lib/frontend/tpl/default.php' ) );
 		$output									= ob_get_contents();
 		ob_end_clean();
 
