@@ -38,7 +38,7 @@ class sv_navigation extends init {
 		add_shortcode( $this->get_module_name(), array( $this, 'shortcode' ) );
 	}
 
-	public function shortcode( $settings, $content = '' ) {
+	public function shortcode( $settings, $content = '' ) :string {
 		$settings								= shortcode_atts(
 			array(
 				'location'						=> false,
