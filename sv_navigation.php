@@ -13,7 +13,7 @@ namespace sv_100;
 
 class sv_navigation extends init {
 	protected static $navs                      = array();
-	protected static $custom_styles             = array();
+	protected static $custom_scripts            = array();
 
 	// Properties
 	protected $location                         = false;
@@ -37,58 +37,34 @@ class sv_navigation extends init {
 		// Shortcodes
 		add_shortcode( $this->get_module_name(), array( $this, 'shortcode' ) );
 
-		$this->register_scripts();
+		$this->load_modules();
+	}
+
+	protected function load_modules() :sv_navigation {
+		require_once( $this->get_path( 'lib/modules/walker.php' ) );
+
+		return $this;
 	}
 
 	public function shortcode( $settings, $content = '' ) {
 		$settings								= shortcode_atts(
 			array(
-				'inline'						=> true,
 				'location'						=> false,
 				'depth'                         => 3,
+				'show_images'                   => false,
 			),
 			$settings,
 			$this->get_module_name()
 		);
+
 		$settings['location']                   = $this->get_prefix( $settings['location'] );
 
-		$this->load_scripts( $settings );
-
 		ob_start();
-		include( $this->get_path( 'lib/tpl/frontend.php' ) );
+		include( $this->get_path( 'lib/frontend/tpl/default.php' ) );
 		$output									= ob_get_contents();
 		ob_end_clean();
 
 		return $output;
-	}
-
-	// Registers standard scripts
-	protected function register_scripts() :sv_navigation {
-		// Styles
-		$this->scripts_queue['frontend']	    = static::$scripts
-			->create( $this )
-			->set_ID( 'frontend' )
-			->set_path( 'lib/css/frontend.css' )
-			->set_inline( true );
-
-		return $this;
-	}
-
-	// Loads the scripts
-	protected function load_scripts( array $settings ) :sv_navigation {
-		if ( isset( static::$custom_styles[ $settings['location'] ] ) ) {
-			static::$scripts->create( $this )
-			                ->set_ID( $settings['location'] )
-			                ->set_path( '../' . static::$custom_styles[ $settings['location'] ] )
-			                ->set_inline( $settings['inline'] )
-			                ->set_is_enqueued();
-		} else {
-			$this->scripts_queue['frontend']
-				->set_inline( $settings['inline'] )
-				->set_is_enqueued();
-		}
-
-		return $this;
 	}
 
 	// Registers all created navigations
@@ -133,19 +109,5 @@ class sv_navigation extends init {
 
 	public function get_desc() :string {
 		return $this->description;
-	}
-
-	public function set_css( string $css_path, string $location = '' ) :sv_navigation {
-		if ( !empty( $location ) ) {
-			static::$custom_styles[ $this->get_prefix( $location ) ]    = $css_path;
-		} else {
-			static::$custom_styles[ $this->get_location() ]             = $css_path;
-		}
-
-		return $this;
-	}
-
-	public function get_css() :string {
-		return static::$custom_styles[ $this->get_location() ];
 	}
 }
