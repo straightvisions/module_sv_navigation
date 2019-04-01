@@ -46,7 +46,7 @@ class sv_navigation extends init {
 		return $this;
 	}
 
-	public function shortcode( $settings, $content = '' ) {
+	public function shortcode( $settings, $content = '' ) :string {
 		$settings								= shortcode_atts(
 			array(
 				'location'						=> false,
