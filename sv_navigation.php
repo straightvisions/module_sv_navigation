@@ -36,6 +36,14 @@ class sv_navigation extends init {
 
 		// Shortcodes
 		add_shortcode( $this->get_module_name(), array( $this, 'shortcode' ) );
+
+		$this->load_modules();
+	}
+
+	protected function load_modules() :sv_navigation {
+		require_once( $this->get_path( 'lib/modules/walker.php' ) );
+
+		return $this;
 	}
 
 	public function shortcode( $settings, $content = '' ) :string {
@@ -43,6 +51,7 @@ class sv_navigation extends init {
 			array(
 				'location'						=> false,
 				'depth'                         => 3,
+				'show_images'                   => false,
 			),
 			$settings,
 			$this->get_module_name()
