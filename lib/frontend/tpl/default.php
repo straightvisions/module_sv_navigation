@@ -6,4 +6,6 @@ if ( has_nav_menu( $settings['location'] ) ) {
 		'container_class'	=> $this->get_prefix(),
 		'walker'            => new sv_100\sv_navigation_walker( $settings['show_images'] ),
 	));
+
+	echo '<button type="button" class="' . $this->get_prefix( 'mobile_menu_toggle' ) . '"></button>';
 }
