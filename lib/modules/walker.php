@@ -4,6 +4,7 @@ namespace sv_100;
 class sv_navigation_walker extends \Walker_Nav_Menu {
 	protected $init;
 	protected $show_images;
+	protected $child_images;
 
 
 	public function __construct( $show_images ) {
@@ -11,13 +12,12 @@ class sv_navigation_walker extends \Walker_Nav_Menu {
 		$this->show_images  = $show_images;
 	}
 
-	function start_lvl( &$output, $depth = 0, $args = array() ){
-		$indent     = str_repeat( "\t", $depth );
-		$submenu    = ( $depth > 0 ) ? ' sub-menu' : '';
-		$output     .= "\n$indent<ul class=\"sub-menu$submenu depth_$depth\">\n";
+	function start_lvl( &$output, $depth = 0, $args = array() ) {
+		$indent         = str_repeat( "\t", $depth );
+		$output         .= "\n$indent<ul class=\"sub-menu depth_$depth\">\n";
 	}
 
-	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ){
+	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$indent         = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 		$li_attributes  = '';
 		$classes        = empty( $item->classes ) ? array() : (array) $item->classes;
@@ -25,10 +25,6 @@ class sv_navigation_walker extends \Walker_Nav_Menu {
 		$classes[]      = ( $args->walker->has_children ) ? 'dropdown' : '';
 		$classes[]      = ( $item->current || $item->current_item_ancestor ) ? 'active' : '';
 		$classes[]      = 'menu-item-' . $item->ID;
-
-		if( $depth && $args->walker->has_children ){
-			$classes[]  = 'dropdown-submenu';
-		}
 
 		$class_names    =  join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 		$class_names    = ' class="' . esc_attr( $class_names ) . '"';
@@ -48,7 +44,16 @@ class sv_navigation_walker extends \Walker_Nav_Menu {
 		$item_output    = $args->before;
 		$item_output    .= '<a' . $attributes . '>';
 
-		if ( $this->show_images && in_array( 'show_image', $classes ) && !$args->walker->has_children ) {
+		// Checks if this menu shows thumbnails and tells the children to show their thumbnails
+		if ( $depth < 1 && $this->show_images && in_array( 'show_images', $classes )
+		     && $args->walker->has_children && !$this->child_images ) {
+			$this->child_images = true;
+		} else if ( $depth < 1 && $this->show_images && !in_array( 'show_images', $classes )
+		            && $args->walker->has_children && $this->child_images  ) {
+			$this->child_images = false;
+		}
+
+		if ( $this->show_images && $this->child_images && !$args->walker->has_children && $depth > 0 ) {
 			$item_output    .= '<div class="item-thumbnail">';
 			$item_output    .= get_the_post_thumbnail( $item->object_id, 'medium', array( 'alt' => esc_attr( $item->title ) ) );
 			$item_output    .= '</div>';
