@@ -1,11 +1,9 @@
 <?php
 if ( has_nav_menu( $settings['location'] ) ) {
-	$container_class        = $settings['class'] ? $this->get_prefix() . ' ' . $settings['class'] : $this->get_prefix();
-
 	wp_nav_menu( array(
 		'theme_location'	=> $settings['location'],
 		'depth'				=> $settings['depth'],
-		'container_class'	=> $container_class,
+		'container_class'	=> $settings['location'],
 		'walker'            => new sv_100\sv_navigation_walker( $settings['show_images'] ),
 	));
 

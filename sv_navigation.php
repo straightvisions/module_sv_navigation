@@ -51,8 +51,7 @@ class sv_navigation extends init {
 			array(
 				'location'						=> false,
 				'depth'                         => 3,
-				'show_images'                   => false,
-				'class'                         => false,
+				'show_images'                   => false
 			),
 			$settings,
 			$this->get_module_name()
