@@ -20,10 +20,6 @@ class sv_navigation extends init {
 	protected $menu								= array();
 	protected $old								= array();
 
-	public function __construct() {
-
-	}
-
 	public function init() {
 		// Module Info
 		$this->set_module_title( 'SV Navigation' );
@@ -32,9 +28,6 @@ class sv_navigation extends init {
 		// Action Hooks
 		add_action( 'after_setup_theme', array( $this, 'register_navs' ) );
 		add_action( 'after_switch_theme', array( $this, 'nav_location_rescue' ) );
-		
-		// Shortcodes
-		add_shortcode( $this->get_module_name(), array( $this, 'shortcode' ) );
 
 		$this->load_modules();
 	}
@@ -45,7 +38,7 @@ class sv_navigation extends init {
 		return $this;
 	}
 
-	public function shortcode( $settings, $content = '' ): string {
+	public function load( $settings = array() ): string {
 		$settings								= shortcode_atts(
 			array(
 				'location'						=> false,
