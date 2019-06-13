@@ -25,12 +25,9 @@ class sv_navigation extends init {
 	}
 
 	public function init() {
-		// Translates the module
-		load_theme_textdomain( 'sv_navigation', $this->get_path( 'languages' ) );
-
 		// Module Info
 		$this->set_module_title( 'SV Navigation' );
-		$this->set_module_desc( __( 'This module gives the ability to manage and display navigations via the "[sv_navigation]" shortcode.', 'sv_navigation' ) );
+		$this->set_module_desc( __( 'This module gives the ability to manage and display navigations via the "[sv_navigation]" shortcode.', 'sv_100' ) );
 
 		// Action Hooks
 		add_action( 'after_setup_theme', array( $this, 'register_navs' ) );
