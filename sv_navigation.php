@@ -87,7 +87,7 @@ class sv_navigation extends init {
 	}
 
 	// Nav Methods
-	public function create( object $parent ): sv_navigation {
+	public function create( $parent ): sv_navigation {
 		$new                                    = new static();
 
 		$new->set_root( $parent->get_root() );
@@ -131,7 +131,7 @@ class sv_navigation extends init {
 	}
 	
 	// Menu Methods
-	public function create_menu( object $parent ): sv_navigation {
+	public function create_menu( $parent ): sv_navigation {
 		$new                                    = new static();
 		
 		$new->set_root( $parent->get_root() );
