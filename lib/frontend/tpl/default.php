@@ -1,12 +1,15 @@
 <?php
 if ( has_nav_menu( $settings['location'] ) ) {
-	wp_nav_menu( array(
+	$menu = wp_nav_menu( array(
 		'theme_location'	=> $settings['location'],
 		'depth'				=> $settings['depth'],
 		'container_class'	=> $settings['location'],
+		'echo'				=> false,
 		'walker'            => new sv_100\sv_navigation_walker( $settings['show_images'] ),
 	));
-	if(wp_get_nav_menu_items($settings['location'])) {
+	
+	if ( $menu ) {
+		echo $menu;
 		echo '<button type="button" class="' . $this->get_prefix('mobile_menu_toggle') . ' ' . $settings['location'] . '_mobile_menu_toggle"></button>';
 	}
 }
