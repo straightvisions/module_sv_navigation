@@ -29,7 +29,13 @@ class sv_navigation extends init {
 		add_action( 'after_setup_theme', array( $this, 'register_navs' ) );
 		add_action( 'after_switch_theme', array( $this, 'nav_location_rescue' ) );
 
-		$this->load_modules();
+		$this->add_theme_support()->load_modules();
+	}
+	
+	protected function add_theme_support(): sv_navigation {
+		add_image_size( 'sv_100_nav_thumbnail', 250, 130 );
+		
+		return $this;
 	}
 
 	protected function load_modules(): sv_navigation {
