@@ -43,6 +43,26 @@ class sv_navigation extends init {
 
 		return $this;
 	}
+	public function has_items($location): bool{
+		return ((count($this->get_nav_menu_items_by_location($location)) > 0) ? true : false);
+	}
+	protected function get_nav_menu_items_by_location( $location, $args = [] ):array {
+		
+		// Get all locations
+		$locations = get_nav_menu_locations();
+		
+		// Get object id by location
+		if(!isset($locations[$location])){
+			return array();
+		}
+		$object = wp_get_nav_menu_object( $locations[$location] );
+		
+		// Get menu items by menu name
+		$menu_items = wp_get_nav_menu_items( $object->name, $args );
+		
+		// Return menu post objects
+		return $menu_items ? $menu_items : array();
+	}
 
 	public function load( $settings = array() ): string {
 		$settings								= shortcode_atts(
