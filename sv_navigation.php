@@ -44,6 +44,8 @@ class sv_navigation extends init {
 		return $this;
 	}
 	public function has_items($location): bool{
+		$location = $this->get_prefix( $location );
+
 		return ((count($this->get_nav_menu_items_by_location($location)) > 0) ? true : false);
 	}
 	protected function get_nav_menu_items_by_location( $location, $args = [] ):array {
