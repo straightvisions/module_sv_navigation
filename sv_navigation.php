@@ -23,7 +23,7 @@ class sv_navigation extends init {
 	public function init() {
 		// Module Info
 		$this->set_module_title( 'SV Navigation' );
-		$this->set_module_desc( __( 'This module gives the ability to manage and display navigations via the "[sv_navigation]" shortcode.', 'straightvisions_100' ) );
+		$this->set_module_desc( __( 'This module gives the ability to manage and display navigations via the "[sv_navigation]" shortcode.', 'straightvisions-100' ) );
 
 		// Action Hooks
 		add_action( 'after_setup_theme', array( $this, 'register_navs' ) );
