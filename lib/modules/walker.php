@@ -1,5 +1,5 @@
 <?php
-namespace sv_100;
+namespace sv100;
 
 class sv_navigation_walker extends \Walker_Nav_Menu {
 	protected $init;
@@ -55,7 +55,7 @@ class sv_navigation_walker extends \Walker_Nav_Menu {
 
 		if ( $this->show_images && $this->child_images && !$args->walker->has_children && $depth > 0 ) {
 			$item_output    .= '<div class="item-thumbnail">';
-			$item_output    .= get_the_post_thumbnail( $item->object_id, 'sv_100_nav_thumbnail', array( 'alt' => esc_attr( $item->title ) ) );
+			$item_output    .= get_the_post_thumbnail( $item->object_id, 'sv100_nav_thumbnail', array( 'alt' => esc_attr( $item->title ) ) );
 			$item_output    .= '</div>';
 		}
 

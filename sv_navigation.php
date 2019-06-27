@@ -1,10 +1,10 @@
 <?php
-namespace sv_100;
+namespace sv100;
 
 /**
  * @version         3.000
  * @author			straightvisions
- * @package			sv_100
+ * @package			sv100
  * @copyright		2019 straightvisions GmbH
  * @link			https://straightvisions.com
  * @since			3.000
@@ -23,7 +23,7 @@ class sv_navigation extends init {
 	public function init() {
 		// Module Info
 		$this->set_module_title( 'SV Navigation' );
-		$this->set_module_desc( __( 'This module gives the ability to manage and display navigations via the "[sv_navigation]" shortcode.', 'straightvisions-100' ) );
+		$this->set_module_desc( __( 'This module gives the ability to manage and display navigations via the "[sv_navigation]" shortcode.', 'sv100' ) );
 
 		// Action Hooks
 		add_action( 'after_setup_theme', array( $this, 'register_navs' ) );
@@ -33,7 +33,7 @@ class sv_navigation extends init {
 	}
 	
 	protected function add_theme_support(): sv_navigation {
-		add_image_size( 'sv_100_nav_thumbnail', 250, 130 );
+		add_image_size( 'sv100_nav_thumbnail', 250, 130 );
 		
 		return $this;
 	}
@@ -152,14 +152,14 @@ class sv_navigation extends init {
 	}
 	
 	// Menu Methods
-	public function create_menu( $parent ): sv_navigation {
+	public function create_menu( $parent, $location ): sv_navigation {
 		$new                                    = new static();
 		
 		$new->set_root( $parent->get_root() );
 		$new->set_parent( $parent );
 		
-		$new->menu['name']                 		= $this->get_prefix( $parent->get_module_name() );
-		$new->menu['location']					= $this->get_prefix( $parent->get_module_name() );
+		$new->menu['name']                 		= $this->get_prefix( $parent->get_module_name() . '_' . $location );
+		$new->menu['location']					= $this->get_prefix( $parent->get_module_name() . '_' . $location );
 		
 		return $new;
 	}
