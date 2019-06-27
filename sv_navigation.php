@@ -122,7 +122,7 @@ class sv_navigation extends init {
 	public function load_nav(): sv_navigation {
 		static::$navs[ $this->get_location() ]  = $this->get_desc() ? $this->get_desc() : $this->get_parent()->get_module_name();
 
-		return $this->get_root()->sv_navigation;
+		return $this->get_module('sv_navigation');
 	}
 	
 	// Registers all created navigations
