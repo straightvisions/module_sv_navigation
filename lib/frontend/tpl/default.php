@@ -10,6 +10,6 @@ if ( has_nav_menu( $settings['location'] ) ) {
 	
 	if ( $nav_menu ) {
 		echo $nav_menu;
-		echo '<button type="button" class="' . $this->get_prefix('mobile_menu_toggle') . ' ' . $settings['location'] . '_mobile_menu_toggle"></button>';
+		echo '<button type="button" class="' . $this->get_prefix( 'mobile_menu_toggle' ) . ' ' . $settings['location'] . '_mobile_menu_toggle"></button>';
 	}
 }
