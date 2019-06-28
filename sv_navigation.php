@@ -49,6 +49,7 @@
 	
 			return ( ( count( $this->get_nav_menu_items_by_location( $location ) ) > 0 ) ? true : false );
 		}
+		
 		protected function get_nav_menu_items_by_location( $location, $args = [] ): array {
 			
 			// Get all locations
