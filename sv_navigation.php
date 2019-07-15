@@ -44,17 +44,16 @@
 			return $this;
 		}
 		
-		public function has_items( $location ): bool{
+		public function has_items( $location ): bool {
 			$location = $this->get_prefix( $location );
 	
 			return ( ( count( $this->get_nav_menu_items_by_location( $location ) ) > 0 ) ? true : false );
 		}
 		
 		protected function get_nav_menu_items_by_location( $location, $args = [] ): array {
-			
 			// Get all locations
 			$locations = get_nav_menu_locations();
-			
+
 			// Get object id by location
 			if( ! isset( $locations[ $location ] ) ) {
 				return array();
@@ -62,8 +61,12 @@
 			
 			$object = wp_get_nav_menu_object( $locations[ $location ] );
 			
-			// Get menu items by menu name
-			$menu_items = wp_get_nav_menu_items( $object->name, $args );
+			if ( $object ) {
+				// Get menu items by menu name
+				$menu_items = wp_get_nav_menu_items( $object->name, $args );
+			} else {
+				$menu_items = array();
+			}
 			
 			// Return menu post objects
 			return $menu_items ? $menu_items : array();
