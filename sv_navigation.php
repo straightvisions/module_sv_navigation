@@ -22,7 +22,7 @@
 	
 		public function init() {
 			// Module Info
-			$this->set_module_title( 'SV Navigation' );
+			$this->set_module_title( __( 'SV Navigation', 'sv100' ) );
 			$this->set_module_desc( __( 'Manages navigations and their locations', 'sv100' ) );
 	
 			// Action Hooks
@@ -97,8 +97,12 @@
 		public function nav_location_rescue() {
 			$old_theme 		= get_option( 'theme_switched' );
 			$old_theme_mods = get_option( 'theme_mods_' . $old_theme );
-			$old_theme_navs = isset( $old_theme_mods['nav_menu_locations'] ) ? $old_theme_mods['nav_menu_locations'] : false;
-			$new_theme_navs = ! empty( get_theme_mod( 'nav_menu_locations' ) ) ? get_theme_mod( 'nav_menu_locations' ) : false;
+			$old_theme_navs = isset( $old_theme_mods['nav_menu_locations'] )
+				? $old_theme_mods['nav_menu_locations']
+				: false;
+			$new_theme_navs = ! empty( get_theme_mod( 'nav_menu_locations' ) )
+				? get_theme_mod( 'nav_menu_locations' )
+				: false;
 			
 			if ( ! $new_theme_navs && ! $old_theme_navs ) {
 				$this->create_menus();
@@ -126,7 +130,9 @@
 		}
 	
 		public function load_nav(): sv_navigation {
-			static::$navs[ $this->get_location() ]  = $this->get_desc() ? $this->get_desc() : $this->get_parent()->get_module_name();
+			static::$navs[ $this->get_location() ]  = $this->get_desc()
+				? $this->get_desc()
+				: $this->get_parent()->get_module_name();
 	
 			return $this->get_module( 'sv_navigation' );
 		}
@@ -164,8 +170,8 @@
 			$new->set_root( $parent->get_root() );
 			$new->set_parent( $parent );
 			
-			$new->menu['name']                 		= $this->get_prefix( $parent->get_module_name() . '_' . $location );
-			$new->menu['location']					= $this->get_prefix( $parent->get_module_name() . '_' . $location );
+			$new->menu['name']      = $this->get_prefix( $parent->get_module_name() . '_' . $location );
+			$new->menu['location']	= $this->get_prefix( $parent->get_module_name() . '_' . $location );
 			
 			return $new;
 		}
