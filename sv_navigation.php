@@ -33,7 +33,7 @@
 		}
 		
 		protected function add_theme_support(): sv_navigation {
-			add_image_size( 'sv100_nav_thumbnail', 250, 130 );
+			add_image_size( 'sv100_nav_thumbnail', 250, 200 );
 			
 			return $this;
 		}
