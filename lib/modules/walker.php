@@ -45,14 +45,12 @@
 			$item_output    .= '<a' . $attributes . '>';
 	
 			// Checks if this menu shows thumbnails and tells the children to show their thumbnails
-			if ( $depth < 1 && $this->show_images && in_array( 'show_images', $classes )
-				 && $args->walker->has_children && !$this->child_images ) {
+			if ( $depth < 1 && $this->show_images && $args->walker->has_children  ) {
 				$this->child_images = true;
-			} else if ( $depth < 1 && $this->show_images && !in_array( 'show_images', $classes )
-						&& $args->walker->has_children && $this->child_images  ) {
+			} else if ( $depth < 1 && $this->show_images && $args->walker->has_children  ) {
 				$this->child_images = false;
 			}
-	
+			
 			if ( $this->show_images && $this->child_images && !$args->walker->has_children && $depth > 0 ) {
 				$item_output    .= '<div class="item-thumbnail">';
 				$item_output    .= get_the_post_thumbnail( $item->object_id, 'sv100_nav_thumbnail', array( 'alt' => esc_attr( $item->title ) ) );
