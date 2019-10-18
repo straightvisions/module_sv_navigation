@@ -53,7 +53,7 @@
 			
 			if ( $this->show_images && $this->child_images && !$args->walker->has_children && $depth > 0 ) {
 				$item_output    .= '<div class="item-thumbnail">';
-				$item_output    .= get_the_post_thumbnail( $item->object_id, 'sv100_nav_thumbnail', array( 'alt' => esc_attr( $item->title ) ) );
+				$item_output    .= '<img src="'.esc_url(wp_get_attachment_image_src(get_post_thumbnail_id($item->object_id), 'sv100_nav_thumbnail', false)[0]).'" alt="'.esc_attr( $item->title ).'" />';
 				$item_output    .= '</div>';
 			}
 	
