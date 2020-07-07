@@ -45,6 +45,7 @@
 			$item_output    .= '<a' . $attributes . '>';
 	
 			// Checks if this menu shows thumbnails and tells the children to show their thumbnails
+			// @todo: make this an opt in feature
 			if ( $depth < 1 && $this->show_images && $args->walker->has_children  ) {
 				$this->child_images = true;
 			} else if ( $depth < 1 && $this->show_images && $args->walker->has_children  ) {

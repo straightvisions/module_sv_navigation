@@ -29,7 +29,10 @@
 			add_action( 'after_setup_theme', array( $this, 'register_navs' ) );
 			add_action( 'after_switch_theme', array( $this, 'nav_location_rescue' ) );
 	
-			$this->add_theme_support()->load_modules();
+			$this->load_modules();
+
+			// @todo: make this an opt in feature
+			// $this->add_theme_support();
 		}
 		
 		protected function add_theme_support(): sv_navigation {
