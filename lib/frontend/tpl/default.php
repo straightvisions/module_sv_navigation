@@ -9,7 +9,7 @@ if ( has_nav_menu( $settings['location'] ) ) {
 	));
 	
 	if ( $nav_menu ) {
-	    echo '<div class="'.$this->get_prefix('container').'">';
+	    echo '<div class="'.$this->get_prefix('container').' '.$this->get_prefix('container').'_'.$settings['location'].'">';
             echo $nav_menu;
             echo '<button type="button" class="' . $this->get_prefix( 'mobile_menu_toggle' )
                  . ' ' . $settings['location']
