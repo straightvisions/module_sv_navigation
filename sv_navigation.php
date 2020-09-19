@@ -1,16 +1,6 @@
 <?php
 	namespace sv100;
-	
-	/**
-	 * @version         4.007
-	 * @author			straightvisions GmbH
-	 * @package			sv100
-	 * @copyright		2019 straightvisions GmbH
-	 * @link			https://straightvisions.com
-	 * @since			1.000
-	 * @license			See license.txt or https://straightvisions.com
-	 */
-	
+
 	class sv_navigation extends init {
 		protected static $navs                      = array();
 		protected static $menus						= array();
@@ -89,7 +79,7 @@
 			$settings['location'] = $this->get_prefix( $settings['location'] );
 	
 			ob_start();
-			include( $this->get_path( 'lib/frontend/tpl/default.php' ) );
+			include( $this->get_path( 'lib/tpl/frontend/default.php' ) );
 			$output									= ob_get_contents();
 			ob_end_clean();
 	
