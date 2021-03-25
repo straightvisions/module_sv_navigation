@@ -2,7 +2,7 @@
 	namespace sv100;
 
 	class sv_navigation extends init {
-		protected static $navs                      = array();
+		protected static $navs					  = array();
 		protected static $menus						= array();
 		
 		// Properties
@@ -69,7 +69,7 @@
 			$settings				= shortcode_atts(
 				array(
 					'location'		=> false,
-					'depth'         => 3,
+					'depth'		 => 3,
 					'show_images'   => false
 				),
 				$settings,
@@ -112,12 +112,12 @@
 	
 		// Nav Methods
 		public function create( $parent ): sv_navigation {
-			$new                                    = new static();
+			$new									= new static();
 	
 			$new->set_root( $parent->get_root() );
 			$new->set_parent( $parent );
 	
-			$new->nav['location']                  	= $this->get_prefix( $parent->get_module_name() );
+			$new->nav['location']				  	= $this->get_prefix( $parent->get_module_name() );
 	
 			return $new;
 		}
@@ -137,7 +137,7 @@
 	
 		// Nav - Setter & Getter
 		public function set_location( string $location ): sv_navigation {
-			$this->nav['location']                 = $this->get_location() . '_' . $location;
+			$this->nav['location']				 = $this->get_location() . '_' . $location;
 	
 			return $this;
 		}
@@ -147,7 +147,7 @@
 		}
 	
 		public function set_desc( string $description ): sv_navigation {
-			$this->nav['description']              = $description;
+			$this->nav['description']			  = $description;
 	
 			return $this;
 		}
@@ -158,12 +158,12 @@
 		
 		// Menu Methods
 		public function create_menu( $parent, $location ): sv_navigation {
-			$new                                    = new static();
+			$new									= new static();
 			
 			$new->set_root( $parent->get_root() );
 			$new->set_parent( $parent );
 			
-			$new->menu['name']      = $this->get_prefix( $parent->get_module_name() . '_' . $location );
+			$new->menu['name']	  = $this->get_prefix( $parent->get_module_name() . '_' . $location );
 			$new->menu['location']	= $this->get_prefix( $parent->get_module_name() . '_' . $location );
 			
 			return $new;

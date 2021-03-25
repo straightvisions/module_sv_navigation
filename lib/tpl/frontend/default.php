@@ -4,7 +4,7 @@
 		'depth'				=> $settings['depth'],
 		'container_class'	=> $settings['location'],
 		'echo'				=> false,
-		'walker'            => new sv100\sv_navigation_walker( $settings['show_images'] ),
+		'walker'			=> new sv100\sv_navigation_walker( $settings['show_images'] ),
 		'fallback_cb'		=> '__return_false'
 	));
 
