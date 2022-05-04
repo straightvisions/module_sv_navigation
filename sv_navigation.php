@@ -1,18 +1,8 @@
 <?php
 	namespace sv100;
-	
-	/**
-	 * @version         4.007
-	 * @author			straightvisions GmbH
-	 * @package			sv100
-	 * @copyright		2019 straightvisions GmbH
-	 * @link			https://straightvisions.com
-	 * @since			1.000
-	 * @license			See license.txt or https://straightvisions.com
-	 */
-	
+
 	class sv_navigation extends init {
-		protected static $navs                      = array();
+		protected static $navs					  = array();
 		protected static $menus						= array();
 		
 		// Properties
@@ -29,7 +19,10 @@
 			add_action( 'after_setup_theme', array( $this, 'register_navs' ) );
 			add_action( 'after_switch_theme', array( $this, 'nav_location_rescue' ) );
 	
-			$this->add_theme_support()->load_modules();
+			$this->load_modules();
+
+			// @todo: make this an opt in feature
+			// $this->add_theme_support();
 		}
 		
 		protected function add_theme_support(): sv_navigation {
@@ -76,7 +69,7 @@
 			$settings				= shortcode_atts(
 				array(
 					'location'		=> false,
-					'depth'         => 3,
+					'depth'		 => 3,
 					'show_images'   => false
 				),
 				$settings,
@@ -86,7 +79,7 @@
 			$settings['location'] = $this->get_prefix( $settings['location'] );
 	
 			ob_start();
-			include( $this->get_path( 'lib/frontend/tpl/default.php' ) );
+			include( $this->get_path( 'lib/tpl/frontend/default.php' ) );
 			$output									= ob_get_contents();
 			ob_end_clean();
 	
@@ -119,12 +112,12 @@
 	
 		// Nav Methods
 		public function create( $parent ): sv_navigation {
-			$new                                    = new static();
+			$new									= new static();
 	
 			$new->set_root( $parent->get_root() );
 			$new->set_parent( $parent );
 	
-			$new->nav['location']                  	= $this->get_prefix( $parent->get_module_name() );
+			$new->nav['location']				  	= $this->get_prefix( $parent->get_module_name() );
 	
 			return $new;
 		}
@@ -144,7 +137,7 @@
 	
 		// Nav - Setter & Getter
 		public function set_location( string $location ): sv_navigation {
-			$this->nav['location']                 = $this->get_location() . '_' . $location;
+			$this->nav['location']				 = $this->get_location() . '_' . $location;
 	
 			return $this;
 		}
@@ -154,7 +147,7 @@
 		}
 	
 		public function set_desc( string $description ): sv_navigation {
-			$this->nav['description']              = $description;
+			$this->nav['description']			  = $description;
 	
 			return $this;
 		}
@@ -165,12 +158,12 @@
 		
 		// Menu Methods
 		public function create_menu( $parent, $location ): sv_navigation {
-			$new                                    = new static();
+			$new									= new static();
 			
 			$new->set_root( $parent->get_root() );
 			$new->set_parent( $parent );
 			
-			$new->menu['name']      = $this->get_prefix( $parent->get_module_name() . '_' . $location );
+			$new->menu['name']	  = $this->get_prefix( $parent->get_module_name() . '_' . $location );
 			$new->menu['location']	= $this->get_prefix( $parent->get_module_name() . '_' . $location );
 			
 			return $new;
